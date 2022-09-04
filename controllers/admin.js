@@ -17,9 +17,22 @@ exports.getAddProduct = (req, res, next) => {
 
 
 exports.postAddProduct = (req, res, next) => {
-  console.log(req.file);
 
+  const errors = validationResult(req);
   const isLoggedIn = req.session.isLoggedIn ? true : false;
+  if (!errors.isEmpty()) {
+    return res.status(422).render('admin/add-product', {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      formsCSS: true,
+      productCSS: true,
+      activeAddProduct: true,
+      isAuthenticated: isLoggedIn,
+      errorMessage: errors.array()[0].msg,
+      validationErrors: errors.errors
+    })
+  }
+
   const file = req.file;
 
   if (!file) {
@@ -80,9 +93,9 @@ exports.editProduct = (req, res, next) => {
   console.log(res.locals);
   Product.findById(id).then((products) => {
     res.render('admin/edit-product', {
-      pageTitle: 'Add Product',
+      pageTitle: 'Edit Product',
       prod: products,
-      path: '/admin/add-product',
+      path: '/admin/edit-product',
       formsCSS: true,
       productCSS: true,
       activeAddProduct: true,
@@ -97,16 +110,34 @@ exports.editProduct = (req, res, next) => {
 
 exports.updateProduct = (req, res, next) => {
   const id = req.query.id;
-  console.log('file',req.file)
-  const file = req.file;
+
+  const errors = validationResult(req);
+  const isLoggedIn = req.session.isLoggedIn ? true : false;
+
 
   Product.findById(id).then((prod) => {
+    if (!errors.isEmpty()) {
+      return res.status(422).render('admin/edit-product', {
+        pageTitle: 'Edit Product',
+        prod: prod,
+        path: '/admin/edit-product',
+        formsCSS: true,
+        productCSS: true,
+        activeAddProduct: true,
+        errorMessage: '',
+        isAuthenticated: isLoggedIn,
+        errorMessage: errors.array()[0].msg,
+        validationErrors: errors.errors
+      })
+    }
+
     prod.title = req.body.title;
     prod.desc = req.body.description;
-    prod.price = req.body.price 
-    if(req.file != undefined)
-        prod.imageUrl = req.file.path;
+    prod.price = req.body.price
+    if (req.file != undefined)
+      prod.imageUrl = req.file.path;
    
+
     return prod.save();
   }).then((prod) => {
 
