@@ -62,7 +62,7 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   const isLoggedIn = req.session.isLoggedIn ? true : false;
-  Product.find().then((result) => {
+  Product.find({creatorId:req.user._id}).then((result) => {
 
     res.render('admin/products', {
       prods: result,
