@@ -1,0 +1,10 @@
+{
+    "env":{
+        "MONGO_USER":"farhan",
+        "MONGO_PASSWORD":"e7dAU6DHAmyyktuv",
+        "MONGO_DEFAULT_DATABASE":"shop",
+        "userEmail":"farhanbajwa46@gmail.com",
+        "userPassword":"emejxqlvclttlrka",
+        "stripeKey":"sk_test_51LcOzXE6sLZOYHEmmiPtAHqYgDIU9XFCJljyJ3Y3gWlePOFaGMqU7CSIdTq7Hwfak3DaTYuSgP2YLJVilejd4Fda00tCYVVoCJ"
+    }
+}

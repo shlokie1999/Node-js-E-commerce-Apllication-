@@ -1,0 +1,38 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (errorMessage.length) { %>
+            <div class="user-message user-message--error">
+                <%= errorMessage %> 
+            </div>
+        <% } %>
+        <form class="product-form" action="/admin/update-product?id=<%= prod._id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" value="<%= prod.title %> " id="title">
+            </div>
+            <div class="form-control">
+                <label for="image">Image URL</label>
+                <input type="file" name="image" id="imageUrl" >
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" value="<%= +prod.price %>" default step="0.01">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea name="description" id="description"   rows="5"><%= prod.description %></textarea>
+            </div>
+            <input type="hidden" name ="id", value="<%= prod._id %> ">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>"> 
+
+            <button class="btn" type="submit">Update Product</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

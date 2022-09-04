@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/orders.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (prods.length > 0) { %>
+                <ul class="orders">
+                    <% for (let product of prods) { %>
+                        
+                     
+                            <li class="orders__item">
+                                <h1>
+                                   Product Name :  <%= product.productId.title %>
+                                </h1>
+                                <h2>Quantity: <%= product.quantity%> </h2>
+                                <h3>Price : <%= product.productId.price %> </h3>
+                                
+                              
+                            </li>
+                           
+                      <% } %>  
+                      <h2>Order Total : <%= total %> </h2>
+                    </ul>
+          
+            <% } else { %>
+                 <h1>No Products Found!</h1>
+                     <% } %>              
+                     <!-- <div class="centered">
+                      
+                        <form action='/create-order' method="POST">
+                            <input type="hidden" name="_csrf" value="<%=csrfToken%>"> 
+                            <button>Order Now!</button>
+                        </form>
+                    </div> -->
+                    <div class="centered">
+                        <button id="order-btn" class="btn">Order Now!</button>
+                        <script src="https://js.stripe.com/v3/"></script>
+                        <script>
+                            var stripe = Stripe('pk_test_51LcOzXE6sLZOYHEmK37HQ4dDGf8ToJPYdj1SXsx8DVCVunv4ZsMLbuAAFDCKULBhmwAyIfNwCnpIWzBfPv0LbIWJ00f02M3Xy9');
+                            var orderBtn = document.getElementById("order-btn");
+                            orderBtn.addEventListener('click',()=>{
+                                stripe.redirectToCheckout({
+                                    sessionId:'<%= sessionId %>'
+                                })
+                            })
+                        </script>
+                    </div>
+               
+        </main>
+        <%- include('../includes/end.ejs') %>
