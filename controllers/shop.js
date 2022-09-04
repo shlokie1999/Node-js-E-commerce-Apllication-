@@ -250,7 +250,7 @@ exports.getCheckout = (req, res, next) => {
       success_url: 'https://shopingam.herokuapp.com/checkout/success',
       cancel_url: 'https://shopingam.herokuapp.com/checkout/cancel'
     })
-
+    
 
   }).then((session) => {
     console.log('id', session.id)
