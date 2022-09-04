@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
-const nodeMailer = require('nodeMailer');
+const nodeMailer = require('nodemailer');
 const crypto = require('crypto')
 const { validationResult } = require('express-validator')
 // const sendgridTransport = require('nodemailer-sendgrid-transport')
@@ -180,7 +180,7 @@ exports.postReset = (req, res, reset) => {
         subject: 'password reset', // Subject line
         text: 'Hello world from Node.js',       // plaintext body
         html: `<p>you requested a password reset</p>
-                <p>click this link <a href="http://localhost:3000/reset/${token}">reset password</a> to set password. </p>` // html body
+                <p>click this link <a href="https://shopingam.herokuapp.com/reset/${token}">reset password</a> to set password. </p>` // html body
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
