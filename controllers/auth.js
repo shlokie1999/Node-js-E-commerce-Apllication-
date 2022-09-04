@@ -151,7 +151,8 @@ exports.getReset = (req, res, next) => {
     path: '/reset',
     pageTitle: 'Reset Password',
     isAuthenticated: false,
-    errorMessage: req.flash('error')
+    errorMessage: req.flash('error'),
+    success:false
   });
 }
 
@@ -190,7 +191,13 @@ exports.postReset = (req, res, reset) => {
           console.log('Email sent: ' + info.response);
         }
       });
-      res.redirect('/');
+      res.render('auth/reset', {
+        path: '/reset',
+        pageTitle: 'Reset Password',
+        isAuthenticated: false,
+        errorMessage: "Check Your Email Address Reset Link is Sent",
+        success:true
+      });
     }).catch((error) => {
       console.log(error)
     })

@@ -4,3 +4,7 @@
   margin: auto;
   display: block;
 }
+.email{
+  background-color:rgb(104, 233, 104) !important;
+  color:black !important;
+}

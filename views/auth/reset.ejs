@@ -8,7 +8,7 @@
 
     <main>
         <% if (errorMessage.length) { %>
-            <div class="user-message user-message--error">
+            <div class="user-message user-message--error" class="<% if(success){ %> email <% } %>"   >
                 <%= errorMessage %> 
             </div>
         <% } %>
