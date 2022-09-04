@@ -247,8 +247,8 @@ exports.getCheckout = (req, res, next) => {
         }
       }),
       mode: "payment",
-      success_url: 'http://localhost:3000/checkout/success',
-      cancel_url: 'http://localhost:3000/checkout/cancel'
+      success_url: 'https://shopingam.herokuapp.com/checkout/success',
+      cancel_url: 'https://shopingam.herokuapp.com/checkout/cancel'
     })
 
 
